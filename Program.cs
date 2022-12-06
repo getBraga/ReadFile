@@ -11,10 +11,18 @@ namespace ReadFile
 
             string sourcePath = filesTarget.UpdateSourcePath();
             string targetPath = filesTarget.UpdateTargetPath();
-         
+            string[] lines = File.ReadAllLines(sourcePath);
+           
             try
             {
-              
+                using (StreamWriter sw = File.AppendText(targetPath))
+                {
+                    foreach (string line in lines)
+                    {
+                        sw.WriteLine(line.ToUpper());
+                    }
+                }
+
                 using (StreamReader sr = File.OpenText(sourcePath))
 
                 {
